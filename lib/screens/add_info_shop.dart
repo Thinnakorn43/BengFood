@@ -1,6 +1,7 @@
 import 'package:bengfood/utility/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class AddInfoShop extends StatefulWidget {
   @override
@@ -8,6 +9,31 @@ class AddInfoShop extends StatefulWidget {
 }
 
 class _AddInfoShopState extends State<AddInfoShop> {
+  // Field
+  double lat, lng;
+
+  @override
+  void initState() {
+    super.initState();
+    findLatLog();
+  }
+
+  Future<Null> findLatLog() async {
+    LocationData locationData = await findLocationData();
+    lat = locationData.longitude;
+    lng = locationData.longitude;
+    print('lat = $lat, lng =$lng');
+  }
+
+  Future<LocationData> findLocationData() async {
+    Location location = Location();
+    try {
+      return location.getLocation();
+    } catch (e) {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
