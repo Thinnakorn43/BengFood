@@ -3,6 +3,7 @@ import 'package:bengfood/model/user_model.dart';
 import 'package:bengfood/screens/main_rider.dart';
 import 'package:bengfood/screens/main_shop.dart';
 import 'package:bengfood/screens/main_user.dart';
+import 'package:bengfood/utility/my_constant.dart';
 import 'package:bengfood/utility/my_style.dart';
 import 'package:bengfood/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
@@ -67,7 +68,7 @@ class _SignInState extends State<SignIn> {
 
   Future<Null> checkAuten() async {
     String url =
-        'http://192.168.1.45/bengfood/getuserwhereuser.php?isAdd=true&User=$user';
+        '${MyConstant().domain}/bengfood/getuserwhereuser.php?isAdd=true&User=$user';
     try {
       Response response = await Dio().get(url);
       print('res = $response');

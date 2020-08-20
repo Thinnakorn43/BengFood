@@ -1,3 +1,4 @@
+import 'package:bengfood/utility/my_constant.dart';
 import 'package:bengfood/utility/my_style.dart';
 import 'package:bengfood/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
@@ -69,7 +70,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<Null> checkUser() async {
     String url =
-        'http://192.168.1.45/bengfood/getuserwhereuser.php?isAdd=true&User=$user';
+        '${MyConstant().domain}/bengfood/getuserwhereuser.php?isAdd=true&User=$user';
     try {
       Response response = await Dio().get(url);
       if (response.toString() == 'null') {
@@ -82,7 +83,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<Null> registerThead() async {
     String url =
-        'http://192.168.1.45/bengfood/adduser.php?isAdd=true&Name=$name&User=$user&Password=$password&ChooseType=$chooseType';
+        '${MyConstant().domain}/bengfood/adduser.php?isAdd=true&Name=$name&User=$user&Password=$password&ChooseType=$chooseType';
 
     try {
       Response response = await Dio().get(url);

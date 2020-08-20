@@ -5,6 +5,12 @@ class MyStyle {
   Color primaryColor = Colors.green.shade400;
   Color textcolor1 = Colors.indigo.shade500;
 
+  Widget showProgress() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
   BoxDecoration myBoxDecoration(String namePic) {
     return BoxDecoration(
       image: DecorationImage(
