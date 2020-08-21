@@ -67,7 +67,7 @@ class _InfomationShopState extends State<InfomationShop> {
 
   Widget showListInfoShop() => Column(
         children: <Widget>[
-          MyStyle().showTitle2('รายละเอียดร้าน ${userModel.nameShop}'),
+          MyStyle().showTitle2('ร้าน ${userModel.nameShop}'),
           showImage(),
           Row(
             children: <Widget>[
