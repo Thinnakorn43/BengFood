@@ -70,7 +70,7 @@ class _MainShopState extends State<MainShop> {
         title: Text('รายละเอียดของร้าน'),
         onTap: () {
           setState(() {
-            currentWidget = InfotionShopMenu();
+            currentWidget = InfomationShop();
           });
           Navigator.pop(context);
         },
