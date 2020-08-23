@@ -155,7 +155,7 @@ class _ListFoodMenuShopState extends State<ListFoodMenuShop> {
                 onPressed: () async {
                   Navigator.pop(context);
                   String url =
-                      '${MyConstant().domain}/bengfood/PHP/deletefoodwhereid.php?isAdd=true&id=${foodModel.id}';
+                      '${MyConstant().domain}/bengfood/deletefoodwhereid.php?isAdd=true&id=${foodModel.id}';
                   await Dio().get(url).then((value) => readFoodMenu());
                 },
                 child: Text('ยืนยัน'),
