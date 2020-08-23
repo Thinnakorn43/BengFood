@@ -45,7 +45,7 @@ class _EditInfoShopState extends State<EditInfoShop> {
     print('idShop ==>> $idShop');
 
     String url =
-        '${MyConstant().domain}/bengfood/getuserwhereid.php?isAdd=true&id=$idShop';
+        '${MyConstant().domain}/bengfood/getUserWhereId.php?isAdd=true&id=$idShop';
 
     Response response = await Dio().get(url);
     print('response ==>> $response');
@@ -59,7 +59,7 @@ class _EditInfoShopState extends State<EditInfoShop> {
         userModel = UserModel.fromJson(map);
         nameShop = userModel.nameShop;
         address = userModel.address;
-        phone = userModel.phone;
+        phone = userModel.password;
         urlPicture = userModel.urlPicture;
       });
     }
@@ -70,52 +70,46 @@ class _EditInfoShopState extends State<EditInfoShop> {
     return Scaffold(
       body: userModel == null ? MyStyle().showProgress() : showContent(),
       appBar: AppBar(
-        title: Text('แก้ไขข้อมูลของร้าน'),
+        title: Text('ปรับปรุง รายละเอียดร้าน'),
       ),
     );
   }
 
   Widget showContent() => SingleChildScrollView(
         child: Column(
-          children: [
-            MyStyle().mySizebox(),
-            nameShopFrom(),
-            MyStyle().mySizebox(),
+          children: <Widget>[
+            nameShopForm(),
             showImage(),
-            buttonShowEditImage(),
-            MyStyle().mySizebox(),
-            addressFrom(),
-            MyStyle().mySizebox(),
-            phoneFrom(),
+            buttonshowImage(),
+            addressForm(),
+            phoneForm(),
             lat == null ? MyStyle().showProgress() : showMap(),
             editButton()
           ],
         ),
       );
 
-  Widget editButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: RaisedButton.icon(
-        color: MyStyle().darkColor,
-        onPressed: () => confirmDialog(),
-        icon: Icon(
-          Icons.edit,
-          color: Colors.white,
+  Widget editButton() => Container(
+        width: MediaQuery.of(context).size.width,
+        child: RaisedButton.icon(
+          color: MyStyle().darkColor,
+          onPressed: () => confirmDialog(),
+          icon: Icon(
+            Icons.edit,
+            color: Colors.white,
+          ),
+          label: Text(
+            'Update',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
-        label: Text(
-          'แก้ไขข้อมูล',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-  }
+      );
 
   Future<Null> confirmDialog() async {
     showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: Text('คุณต้องการที่จะแก้ไขข้อมูลใช่หรือไม่'),
+        title: Text('คุณแน่ใจว่าจะ ปรับปรุงรายละเอียดร้าน นะคะ ?'),
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -125,11 +119,11 @@ class _EditInfoShopState extends State<EditInfoShop> {
                   Navigator.pop(context);
                   editThread();
                 },
-                child: Text('ใช่'),
+                child: Text('แน่ใจ'),
               ),
               OutlineButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('ไม่'),
+                child: Text('ไม่แน่ใจ'),
               ),
             ],
           )
@@ -140,39 +134,39 @@ class _EditInfoShopState extends State<EditInfoShop> {
 
   Future<Null> editThread() async {
     Random random = Random();
-    int i = random.nextInt(1000000);
+    int i = random.nextInt(100000);
     String nameFile = 'editShop$i.jpg';
 
     Map<String, dynamic> map = Map();
     map['file'] = await MultipartFile.fromFile(file.path, filename: nameFile);
     FormData formData = FormData.fromMap(map);
 
-    String urlUpload = '${MyConstant().domain}/bengfood/saveshop.php';
+    String urlUpload = '${MyConstant().domain}/bengfood/saveShop.php';
     await Dio().post(urlUpload, data: formData).then((value) async {
       urlPicture = '/bengfood/Shop/$nameFile';
+
       String id = userModel.id;
       // print('id = $id');
 
       String url =
-          '${MyConstant().domain}/bengfood/edituserwhereid.php?isAdd=true&id=$id&NameShop=$nameShop&Address=$address&Phone=$phone&UrlPicture=$urlPicture&Lat=$lat&Lng=$lng';
+          '${MyConstant().domain}/bengfood/editUserWhereId.php?isAdd=true&id=$id&NameShop=$nameShop&Address=$address&Phone=$phone&UrlPicture=$urlPicture&Lat=$lat&Lng=$lng';
 
       Response response = await Dio().get(url);
       if (response.toString() == 'true') {
         Navigator.pop(context);
       } else {
-        normalDialog(context, 'ยังไม่สามารถแก้ไขข้อมูลได้ กรุราลองใหม่');
+        normalDialog(context, 'ยัง อัพเดทไม่ได้ กรุณาลองใหม่');
       }
     });
   }
 
-  Set<Marker> currenMarker() {
+  Set<Marker> currentMarker() {
     return <Marker>[
       Marker(
-        markerId: MarkerId('myMarker'),
-        position: LatLng(lat, lng),
-        infoWindow:
-            InfoWindow(title: 'ร้านของฉัน', snippet: 'Lat =$lat, Lng = $lng'),
-      )
+          markerId: MarkerId('myMarker'),
+          position: LatLng(lat, lng),
+          infoWindow: InfoWindow(
+              title: 'ร้านอยู่ที่นี่', snippet: 'Lat = $lat, Lng = $lng'))
     ].toSet();
   }
 
@@ -184,68 +178,52 @@ class _EditInfoShopState extends State<EditInfoShop> {
 
     return Container(
       margin: EdgeInsets.only(top: 16.0),
-      height: 250.0,
+      height: 250,
       child: GoogleMap(
         initialCameraPosition: cameraPosition,
         mapType: MapType.normal,
         onMapCreated: (controller) {},
-        markers: currenMarker(),
+        markers: currentMarker(),
       ),
     );
   }
 
-  Row buttonShowEditImage() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.add_a_photo,
-            size: 30.0,
-          ),
-          onPressed: () => chooseImage(ImageSource.camera),
+  Widget buttonshowImage() => Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add_a_photo),
+              onPressed: () => chooseImage(ImageSource.camera),
+            ),
+            IconButton(
+              icon: Icon(Icons.add_photo_alternate),
+              onPressed: () => chooseImage(ImageSource.gallery),
+            ),
+          ],
         ),
-        IconButton(
-          icon: Icon(
-            Icons.add_photo_alternate,
-            size: 30.0,
-          ),
-          onPressed: () => chooseImage(ImageSource.gallery),
-        )
-      ],
-    );
-  }
+      );
 
   Widget showImage() => Container(
         margin: EdgeInsetsDirectional.only(top: 16.0),
-        width: 250,
-        height: 250.0,
-        child: file == null
-            ? Image.network('${MyConstant().domain}$urlPicture')
-            : Image.file(file),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: 250.0,
+              height: 250.0,
+              child: file == null
+                  ? Image.network('${MyConstant().domain}$urlPicture')
+                  : Image.file(file),
+            ),
+          ],
+        ),
       );
 
-  Widget nameShopFrom() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 250.0,
-            child: TextFormField(
-              onChanged: (value) => nameShop = value,
-              initialValue: nameShop,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'ชื่อร้าน'),
-            ),
-          ),
-        ],
-      );
   Future<Null> chooseImage(ImageSource source) async {
     try {
-      var object = await ImagePicker().getImage(
-        source: source,
-        maxWidth: 800.0,
-        maxHeight: 800.0,
-      );
+      var object = await ImagePicker()
+          .getImage(source: source, maxWidth: 800.0, maxHeight: 800.0);
 
       setState(() {
         file = File(object.path);
@@ -253,31 +231,55 @@ class _EditInfoShopState extends State<EditInfoShop> {
     } catch (e) {}
   }
 
-  Widget addressFrom() => Row(
+  Widget nameShopForm() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Container(
+            margin: EdgeInsets.only(top: 16.0),
             width: 250.0,
             child: TextFormField(
-              onChanged: (value) => address = value,
-              initialValue: address,
+              onChanged: (value) => nameShop = value.trim(),
+              initialValue: nameShop,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'ที่อยู่'),
+                border: OutlineInputBorder(),
+                labelText: 'ชื่อของร้าน',
+              ),
             ),
           ),
         ],
       );
 
-  Widget phoneFrom() => Row(
+  Widget addressForm() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Container(
+            margin: EdgeInsets.only(top: 16.0),
             width: 250.0,
             child: TextFormField(
-              onChanged: (value) => phone = value,
+              onChanged: (value) => address = value.trim(),
+              initialValue: address,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'ที่อยู่ของร้าน',
+              ),
+            ),
+          ),
+        ],
+      );
+
+  Widget phoneForm() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(top: 16.0),
+            width: 250.0,
+            child: TextFormField(
+              onChanged: (value) => phone = value.trim(),
               initialValue: phone,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'เบอร์โทรศัพท์'),
+                border: OutlineInputBorder(),
+                labelText: 'เบอร์ติดต่อร้าน',
+              ),
             ),
           ),
         ],

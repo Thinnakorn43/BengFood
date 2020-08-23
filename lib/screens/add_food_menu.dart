@@ -90,7 +90,9 @@ class _AddFoodMenuState extends State<AddFoodMenu> {
 
       await Dio().post(urlUpload, data: formData).then((value) async {
         String urlPathImage = '/bengfood/Food/$nameFile';
-        print('urlPathImage = ${MyConstant().domain}$urlPathImage');
+        print(
+          'urlPathImage = ${MyConstant().domain}$urlPathImage',
+        );
 
         SharedPreferences preferences = await SharedPreferences.getInstance();
         String idShop = preferences.getString('id');
@@ -167,7 +169,10 @@ class _AddFoodMenuState extends State<AddFoodMenu> {
           width: 250.0,
           height: 250.0,
           child: file == null
-              ? Image.asset('images/foodmenu.png')
+              ? Image.asset(
+                  'images/foodmenu.png',
+                  fit: BoxFit.cover,
+                )
               : Image.file(file),
         ),
       ],
