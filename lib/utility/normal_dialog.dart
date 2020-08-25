@@ -6,22 +6,22 @@ Future<void> normalDialog(BuildContext context, String message) async {
     builder: (context) {
       var redAccent = Colors.redAccent;
       return SimpleDialog(
-      title: Text(message),
-      children: <Widget>[
-        FlatButton(
-          onLongPress: () => Navigator.pop(context),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'OK',
-                style: TextStyle(color: redAccent),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
+        title: Text(message),
+        children: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'OK',
+                  style: TextStyle(color: redAccent),
+                ),
+              ],
+            ),
+          )
+        ],
+      );
     },
   );
 }
