@@ -116,4 +116,6 @@ class MyStyle {
   }
 
   MyStyle();
+
+  iconShowCart(BuildContext context) {}
 }
