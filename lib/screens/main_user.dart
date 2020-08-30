@@ -73,7 +73,7 @@ class _MainUserState extends State<MainUser> {
             currentWidget = ShowStatusFoodOrder();
           });
         },
-        leading: Icon(Icons.restaurant_menu),
+        leading: Icon(Icons.add_alert),
         title: Text('รายการอาหารที่สั่ง'),
       );
 

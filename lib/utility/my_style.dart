@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyStyle {
-  Color darkColor = Colors.blue.shade500;
+  Color darkColor = Colors.amber.shade400;
   Color primaryColor = Colors.green.shade400;
   Color textcolor1 = Colors.indigo.shade500;
 
@@ -58,7 +58,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 24.0,
-          color: Colors.blue.shade900,
+          color: Colors.amber,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -67,7 +67,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 18.0,
-          color: Colors.blue.shade900,
+          color: Colors.amber,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -111,7 +111,7 @@ class MyStyle {
   Container showLogo() {
     return Container(
       width: 120.0,
-      child: Image.asset('images/logo.png'),
+      child: Image.asset('images/logo.png',fit: BoxFit.cover,),
     );
   }
 

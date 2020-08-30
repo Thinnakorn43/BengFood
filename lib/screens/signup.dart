@@ -63,7 +63,7 @@ class _SignUpState extends State<SignUp> {
           },
           child: Text(
             'Register',
-            style: TextStyle(color: Colors.white70, fontSize: 20.0),
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
         ),
       );
@@ -114,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                     }),
                 Text(
                   'ผู้ใช้ทั่วไป',
-                  style: TextStyle(color: MyStyle().darkColor),
+                  style: TextStyle(color:Colors.black38),
                 )
               ],
             ),
@@ -139,7 +139,7 @@ class _SignUpState extends State<SignUp> {
                     }),
                 Text(
                   'เจ้าของร้าน',
-                  style: TextStyle(color: MyStyle().darkColor),
+                  style: TextStyle(color: Colors.black38),
                 )
               ],
             ),
@@ -157,6 +157,7 @@ class _SignUpState extends State<SignUp> {
                 Radio(
                     value: 'Rider',
                     groupValue: chooseType,
+                    hoverColor: Colors.green,
                     onChanged: (value) {
                       setState(() {
                         chooseType = value;
@@ -164,7 +165,7 @@ class _SignUpState extends State<SignUp> {
                     }),
                 Text(
                   'ผู้ส่งอาหาร',
-                  style: TextStyle(color: MyStyle().darkColor),
+                  style: TextStyle(color: Colors.black38),
                 )
               ],
             ),
@@ -184,7 +185,7 @@ class _SignUpState extends State<SignUp> {
                   Icons.face,
                   color: MyStyle().darkColor,
                 ),
-                labelStyle: TextStyle(color: MyStyle().darkColor),
+                labelStyle: TextStyle(color: Colors.black38),
                 labelText: 'Name :',
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: MyStyle().darkColor)),
@@ -208,7 +209,7 @@ class _SignUpState extends State<SignUp> {
                   Icons.account_circle,
                   color: MyStyle().darkColor,
                 ),
-                labelStyle: TextStyle(color: MyStyle().darkColor),
+                labelStyle: TextStyle(color: Colors.black38),
                 labelText: 'User :',
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: MyStyle().darkColor)),
@@ -232,7 +233,7 @@ class _SignUpState extends State<SignUp> {
                   Icons.lock_open,
                   color: MyStyle().darkColor,
                 ),
-                labelStyle: TextStyle(color: MyStyle().darkColor),
+                labelStyle: TextStyle(color: Colors.black38),
                 labelText: 'Password :',
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: MyStyle().darkColor)),

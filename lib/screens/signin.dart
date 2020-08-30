@@ -23,7 +23,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: Text('SignIn'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -60,8 +60,8 @@ class _SignInState extends State<SignIn> {
             }
           },
           child: Text(
-            'login',
-            style: TextStyle(color: Colors.white70, fontSize: 20.0),
+            'Login',
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
         ),
       );
@@ -113,9 +113,9 @@ class _SignInState extends State<SignIn> {
           decoration: InputDecoration(
             prefixIcon: Icon(
               Icons.account_circle,
-              color: MyStyle().darkColor,
+              color: Colors.amber.shade200,
             ),
-            labelStyle: TextStyle(color: MyStyle().darkColor),
+            labelStyle: TextStyle(color: Colors.black38),
             labelText: 'User :',
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: MyStyle().darkColor)),
@@ -133,9 +133,9 @@ class _SignInState extends State<SignIn> {
           decoration: InputDecoration(
             prefixIcon: Icon(
               Icons.lock_open,
-              color: MyStyle().darkColor,
+              color: Colors.amber.shade200,
             ),
-            labelStyle: TextStyle(color: MyStyle().darkColor),
+            labelStyle: TextStyle(color: Colors.black38),
             labelText: 'Password :',
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: MyStyle().darkColor)),

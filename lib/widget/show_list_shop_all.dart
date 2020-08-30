@@ -80,11 +80,14 @@ class _ShowListShopAllState extends State<ShowListShopAll> {
   Widget build(BuildContext context) {
     return shopCards.length == 0
         ? MyStyle().showProgress()
-        : GridView.extent(
-            maxCrossAxisExtent: 180.0,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            children: shopCards,
+        : Container(
+            margin: EdgeInsets.all(8.0),
+            child: GridView.extent(
+              maxCrossAxisExtent: 250.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              children: shopCards,
+            ),
           );
   }
 }
