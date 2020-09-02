@@ -92,7 +92,7 @@ class _ShowMenuFoodState extends State<ShowMenuFood> {
                           children: <Widget>[
                             Container(
                               width:
-                                  MediaQuery.of(context).size.width * 0.5 - 8,
+                                  MediaQuery.of(context).size.width * 0.5 ,
                               child: Text(
                                 foodModels[index].detail,
                                 style: TextStyle(fontSize: 18.0),
