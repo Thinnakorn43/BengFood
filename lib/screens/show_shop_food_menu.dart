@@ -26,15 +26,27 @@ class _ShowShopFoodMenuState extends State<ShowShopFoodMenu> {
 
   BottomNavigationBarItem aboutShopNav() {
     return BottomNavigationBarItem(
-      icon: Icon(Icons.store),
-      title: Text('รายละเอียดร้าน'),
+      icon: Icon(
+        Icons.store,
+        size: 30,
+      ),
+      title: Text(
+        'รายละเอียดร้าน',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
     );
   }
 
   BottomNavigationBarItem showMenuFoodNav() {
     return BottomNavigationBarItem(
-      icon: Icon(Icons.restaurant_menu),
-      title: Text('เมนูอาหาร'),
+      icon: Icon(
+        Icons.restaurant_menu,
+        size: 30,
+      ),
+      title: Text(
+        'เมนูอาหาร',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
     );
   }
 
@@ -44,7 +56,9 @@ class _ShowShopFoodMenuState extends State<ShowShopFoodMenu> {
       appBar: AppBar(
         title: Text(userModel.nameShop),
       ),
-      body: listWidgets.length == 0 ? MyStyle().showProgress() : listWidgets[indexPage],
+      body: listWidgets.length == 0
+          ? MyStyle().showProgress()
+          : listWidgets[indexPage],
       bottomNavigationBar: showBottomNavigationBar(),
     );
   }

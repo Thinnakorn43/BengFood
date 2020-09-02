@@ -61,15 +61,15 @@ class _ShowListShopAllState extends State<ShowListShopAll> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width: 100.0,
-              height: 100.0,
+              width: 110.0,
+              height: 110.0,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                     '${MyConstant().domain}${userModel.urlPicture}'),
               ),
             ),
             MyStyle().mySizebox(),
-            MyStyle().showTitle3(userModel.nameShop),
+            Text(userModel.nameShop,style: TextStyle(fontSize: 20.0),),
           ],
         ),
       ),
@@ -83,7 +83,7 @@ class _ShowListShopAllState extends State<ShowListShopAll> {
         : Container(
             margin: EdgeInsets.all(8.0),
             child: GridView.extent(
-              maxCrossAxisExtent: 250.0,
+              maxCrossAxisExtent: 230.0,
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 10.0,
               children: shopCards,

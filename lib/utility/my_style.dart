@@ -14,15 +14,15 @@ class MyStyle {
   }
 
   TextStyle mainTitle = TextStyle(
-    fontSize: 18.0,
+    fontSize: 22.0,
     fontWeight: FontWeight.bold,
-    color: Colors.purple,
+    color: Colors.black,
   );
 
   TextStyle mainH2Title = TextStyle(
     fontSize: 16.0,
     fontWeight: FontWeight.bold,
-    color: Colors.green.shade700,
+    color: Colors.black,
   );
 
   BoxDecoration myBoxDecoration(String namePic) {
@@ -58,7 +58,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 24.0,
-          color: Colors.amber,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -67,7 +67,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 18.0,
-          color: Colors.amber,
+          color: Colors.black54,
           fontWeight: FontWeight.bold,
         ),
       );
@@ -76,7 +76,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 16.0,
-          color: Colors.blue.shade900,
+          color: Colors.black45,
           fontWeight: FontWeight.w500,
         ),
       );
@@ -85,7 +85,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 16.0,
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.w600,
         ),
       );
@@ -94,7 +94,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 16.0,
-          color: Colors.red.shade900,
+          color: Colors.black,
           fontWeight: FontWeight.w500,
         ),
       );
@@ -103,7 +103,7 @@ class MyStyle {
         title,
         style: TextStyle(
           fontSize: 16.0,
-          color: Colors.purple.shade700,
+          color: Colors.black,
           fontWeight: FontWeight.w500,
         ),
       );

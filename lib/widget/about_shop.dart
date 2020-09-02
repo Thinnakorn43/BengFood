@@ -1,6 +1,7 @@
-import 'dart:math';
+
 
 import 'package:bengfood/model/user_model.dart';
+import 'package:bengfood/utility/my_api.dart';
 import 'package:bengfood/utility/my_constant.dart';
 import 'package:bengfood/utility/my_style.dart';
 import 'package:flutter/material.dart';
@@ -38,39 +39,16 @@ class _AboutShopState extends State<AboutShop> {
       lat2 = double.parse(userModel.lat);
       lng2 = double.parse(userModel.lng);
       print('Lat1 = $lat1, Lng1 = $lng1, Lat2 = $lat2, Lng2 = $lng2');
-      distance = calculateDistance(lat1, lng1, lat2, lng2);
+      distance = MyAPI().calculateDistance(lat1, lng1, lat2, lng2);
 
-      var myFormat = NumberFormat('#0.0#', 'en_US');
+      var myFormat = NumberFormat('##0.0#', 'en_US');
       distanceString = myFormat.format(distance);
 
-      transport = calculateTranspoet(distance);
+      transport = MyAPI().calculateTransport(distance);
 
       print('distance = $distance');
       print('transport = $transport');
     });
-  }
-
-  int calculateTranspoet(double distance) {
-    int trasport;
-    if (distance < 0.5) {
-      trasport = 15;
-    } else {
-      trasport = 15 + (distance - 1).round() * 6;
-      return trasport;
-    }
-  }
-
-  double calculateDistance(double lat1, double lng1, double lat2, double lng2) {
-    double distance = 0;
-
-    var p = 0.017453292519943295;
-    var c = cos;
-    var a = 0.5 -
-        c((lat2 - lat1) * p) / 2 +
-        c(lat1 * p) * c(lat2 * p) * (1 - c((lng2 - lng1) * p)) / 2;
-    distance = 12742 * asin(sqrt(a));
-
-    return distance;
   }
 
   Future<LocationData> findLocationDate() async {
@@ -92,30 +70,64 @@ class _AboutShopState extends State<AboutShop> {
             children: [
               Container(
                 margin: EdgeInsets.all(16.0),
-                width: 150.0,
-                height: 150.0,
-                child: Image.network(
-                  '${MyConstant().domain}${userModel.urlPicture}',
-                  fit: BoxFit.cover,
+                width: 250.0,
+                height: 250.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        '${MyConstant().domain}${userModel.urlPicture}'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text(userModel.address),
+            leading: Icon(
+              Icons.home,
+              color: Colors.amber,
+              size: 35.0,
+            ),
+            title: Text(
+              'ที่อยู่ร้าน ${userModel.address}',
+              style: TextStyle(fontSize: 20.0),
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.phone),
-            title: Text(userModel.phone),
+            leading: Icon(
+              Icons.phone,
+              color: Colors.amber,
+              size: 35.0,
+            ),
+            title: Text(
+              'เบอร์โทรศัพท์ ${userModel.phone}',
+              style: TextStyle(fontSize: 20.0),
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.directions_bike),
-            title: Text(distance == null ? '' : '$distanceString  กิโลเมตร'),
+            leading: Icon(
+              Icons.directions_bike,
+              color: Colors.amber,
+              size: 35.0,
+            ),
+            title: Text(
+              distance == null
+                  ? ''
+                  : 'ระยะทางการจัดส่ง $distanceString  กิโลเมตร',
+              style: TextStyle(fontSize: 20.0),
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.local_atm),
-            title: Text(transport == null ? '' : '$transport บาท'),
+            leading: Icon(
+              Icons.local_atm,
+              color: Colors.amber,
+              size: 35.0,
+            ),
+            title: Text(
+              transport == null ? '' : 'ค่าจัดส่ง $transport บาท',
+              style: TextStyle(fontSize: 20.0),
+            ),
           ),
           showMap()
         ],
@@ -156,7 +168,7 @@ class _AboutShopState extends State<AboutShop> {
 
     return Container(
       margin: EdgeInsets.all(16.0),
-      height: 250.0,
+      height: 300.0,
       child: lat1 == null
           ? MyStyle().showProgress()
           : GoogleMap(
